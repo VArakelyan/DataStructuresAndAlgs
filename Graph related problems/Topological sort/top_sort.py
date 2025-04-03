@@ -1,14 +1,14 @@
 
-def dfs(at, visited, visitednodes, graph):
+def dfs2(at, visited, visitednodes, graph):
     visited[at] = True
     neighbours = graph[at]
     for i in neighbours:
         if not visited[i]:
-            dfs(i, visited, visitednodes, graph)
+            dfs2(i, visited, visitednodes, graph)
     visitednodes.append(at)
 
 
-def topsort(graph):
+def topsort2(graph):
     N = len(graph)
     visited = [False] * N
     result = []
@@ -17,11 +17,28 @@ def topsort(graph):
     for at in graph:
         if not visited[at]:
             visitednodes = []
-            dfs(at, visited, visitednodes, graph)
+            dfs2(at, visited, visitednodes, graph)
             for v in visitednodes:
                 result.append(v)
 
     return result
+
+
+def topsort(graph):
+    visited = [False] * len(graph)
+    stack = []
+    def dfs(at):
+        visited[at] = True
+        for neighbour in graph[at]:
+            if not visited[neighbour]:
+                dfs(neighbour)
+        stack.append(at)
+
+    for i in range(len(graph)):
+        if not visited[i]:
+            dfs(i)
+    return stack[::-1]
+
 
 graph = {
     0: [3],
@@ -41,5 +58,6 @@ graph = {
 
 
 ord = topsort(graph)
-ord.reverse()
 print(ord)
+ord2 = topsort(graph)
+print(ord2)
