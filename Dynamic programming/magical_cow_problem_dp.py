@@ -6,9 +6,10 @@ n = 4
 
 m = 1
 
-queries = [1]
+queries = [5]
 
 initial_cows = [1,3,2,1]
+dp = [[0 for _ in range(c + 1)] for _ in range(max_days + 1)]
 
 def solve(c, n, m, queries, max_days, initial_cows):
 
@@ -18,7 +19,7 @@ def solve(c, n, m, queries, max_days, initial_cows):
             farms += dp[day][i]
         return farms
 
-    dp = [[0 for _ in range(c + 1)] for _ in range(max_days + 1)]
+
     for i in range(n):
         dp[0][initial_cows[i]] += 1
 
@@ -33,6 +34,6 @@ def solve(c, n, m, queries, max_days, initial_cows):
         day = queries[i]
         print(sumRows(dp, day))
 
-solve(c, n, m, queries, max_days, initial_cows)
 
+solve(c, n, m, queries, max_days, initial_cows)
 
