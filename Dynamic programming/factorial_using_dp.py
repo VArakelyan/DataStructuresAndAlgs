@@ -1,11 +1,13 @@
-def fac(n):
-    returns = [0] * (n + 1)
-    returns[0] = 1
+def factorial_dp(n, memo=[1]):
 
-    for i in range(1, n + 1):
-        returns[i] = i * returns[i-1]
+    if n < len(memo):
+        return memo[n]
 
-    return returns[n]
+    for i in range(len(memo), n + 1):
+        memo.append(i * memo[i - 1])
 
+    return memo[n]
 
-print(fac(5))
+print(factorial_dp(5))
+print(factorial_dp(4))
+print(factorial_dp(6))
